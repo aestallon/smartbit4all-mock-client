@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/buildSrc" name="buildSrc">
+                <projects>
+                  <project path="$PROJECT_DIR$/buildSrc" />
+                </projects>
+              </build>
+              <build path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706" name="platform">
+                <projects>
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/api" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/api-cli-rest" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/api-domain" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/api-srv-rest" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/bff-api" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/bff-domain" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/content-access-srv-rest" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/invocation-cli-rest" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/invocation-srv-rest" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/json" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/sec" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/sql" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/testing" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/ui-api" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/ui-api-srv-rest" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/ui-common" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/ui-vaadin" />
+                  <project path="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/vaadin-sec" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/api" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/api-cli-rest" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/api-domain" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/api-srv-rest" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/bff-api" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/bff-domain" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/content-access-srv-rest" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/invocation-cli-rest" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/invocation-srv-rest" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/json" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/sec" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/sql" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/testing" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/ui-api" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/ui-api-srv-rest" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/ui-common" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/ui-vaadin" />
+            <option value="$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706/vaadin-sec" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/smartbit4all-mock-client-core" />
+            <option value="$PROJECT_DIR$/smartbit4all-mock-client-demo-app" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,9 @@
+plugins {
+  id 'java-conventions'
+}
+
+dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  api 'org.springframework.boot:spring-boot-starter-test'
+  api 'org.smartbit4all.platform:api-domain'
+}
