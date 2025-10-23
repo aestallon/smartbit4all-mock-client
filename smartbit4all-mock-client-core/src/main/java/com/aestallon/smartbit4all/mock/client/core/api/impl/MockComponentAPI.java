@@ -1,123 +1,130 @@
 package com.aestallon.smartbit4all.mock.client.core.api.impl;
 
-import java.nio.charset.Charset;
 import java.util.List;
-import java.util.UUID;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Fail.fail;
 import org.smartbit4all.api.view.bean.ComponentModel;
 import org.smartbit4all.api.view.bean.DataChange;
 import org.smartbit4all.api.view.bean.UiActionRequest;
 import org.smartbit4all.api.view.bean.ViewConstraint;
 import org.smartbit4all.api.view.bean.ViewContextChange;
 import org.smartbit4all.api.view.bean.ViewContextData;
+import org.smartbit4all.api.view.bean.ViewContextUpdate;
 import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.test.web.servlet.assertj.MockMvcTester;
-import org.springframework.test.web.servlet.assertj.MvcTestResult;
+import org.springframework.test.web.reactive.server.WebTestClient;
 import com.aestallon.smartbit4all.mock.client.core.api.ComponentAPI;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.aestallon.smartbit4all.mock.client.core.api.newtype.NodeId;
+import com.aestallon.smartbit4all.mock.client.core.api.newtype.SmartLinkId;
+import com.aestallon.smartbit4all.mock.client.core.api.newtype.ViewContextId;
+import com.aestallon.smartbit4all.mock.client.core.api.newtype.ViewId;
+import com.aestallon.smartbit4all.mock.client.core.api.newtype.WidgetId;
 
-public class MockComponentAPI implements ComponentAPI {
+public class MockComponentAPI extends AbstractAPI implements ComponentAPI {
 
-  private final MockMvcTester mvc;
-  private final ObjectMapper objectMapper = new ObjectMapper();
-
-  public MockComponentAPI(MockMvcTester mvc) {
-    this.mvc = mvc;
+  public MockComponentAPI(WebTestClient client, RequestContext context) {
+    super(client, context);
   }
 
   @Override
   public ViewContextData createViewContext() {
-    MvcTestResult result = mvc.post()
-        .uri("/context")
-        .contentType("application/json")
-        .exchange();
-    assertThat(result)
-        .hasStatusOk()
-        .hasContentTypeCompatibleWith(MediaType.APPLICATION_JSON);
-    assertThat(result.getUnresolvedException()).isNull();
-    final var response = result.getResponse();
-    final var body = new String(
-        response.getContentAsByteArray(),
-        Charset.forName(response.getCharacterEncoding()));
-    objectMapper.readValue(body, new TypeReference<ViewContextData>() {});
-    return null;
+    return post(RequestSpec.of(UriSpec.of("/context"), ViewContextData.class));
   }
 
   @Override
-  public ViewContextData updateViewContext(ViewContextData viewContextData) {
-    return null;
+  public ViewContextData updateViewContext(ViewContextUpdate viewContextUpdate) {
+    return put(RequestSpec.of(UriSpec.of("/context"), ViewContextData.class, viewContextUpdate));
   }
 
   @Override
-  public ViewContextData getViewContext(UUID uuid) {
-    return null;
+  public ViewContextData getViewContext(ViewContextId viewContextId) {
+    return get(RequestSpec.of(UriSpec.of("/context/{uuid}", viewContextId), ViewContextData.class));
   }
 
   @Override
-  public ViewContextData message(String viewUuid, String messageUuid, String messageResult) {
-    return null;
+  public ViewContextData message(ViewId viewId, ViewId messageId, String messageResult) {
+    return post(RequestSpec.of(
+        UriSpec.of("/message/{viewUuid}/{messageUuid}", viewId, messageId),
+        ViewContextData.class,
+        messageResult
+    ));
   }
 
   @Override
-  public ViewConstraint getViewConstraint(UUID uuid) {
-    return null;
+  public ViewConstraint getViewConstraint(ViewId viewId) {
+    return get(RequestSpec.of(
+        UriSpec.of("/view/{uuid}/constraint", viewId),
+        ViewConstraint.class));
   }
 
   @Override
-  public void showPublishedView(String channel, UUID uuid) {
-
+  public void showPublishedView(String channel, SmartLinkId smartLinkId) {
+    put(RequestSpec.of(UriSpec.of("/smartlink/{channel}/{uuid}", channel, smartLinkId)));
   }
 
   @Override
-  public Resource downloadItem(UUID uuid, String item) {
-    return null;
+  public Resource downloadItem(ViewId viewId, String item) {
+    return fail("Not yet implemented");
   }
 
   @Override
-  public ComponentModel getComponentModel(UUID uuid) {
-    return null;
+  public ComponentModel getComponentModel(ViewId viewId) {
+    return get(RequestSpec.of(
+        UriSpec.of("/component/{uuid}", viewId.uuid()),
+        ComponentModel.class));
   }
 
   @Override
-  public ViewContextChange getComponentModel2(UUID uuid) {
-    return null;
+  public ViewContextChange getComponentModel2(ViewId viewId) {
+    return get(RequestSpec.of(
+        UriSpec.of("/component/{uuid}/load", viewId.uuid()),
+        ViewContextChange.class));
   }
 
   @Override
-  public ViewContextChange performAction(UUID uuid, UiActionRequest request) {
-    return null;
+  public ViewContextChange performAction(ViewId viewId, UiActionRequest request) {
+    return post(RequestSpec.of(
+        UriSpec.of("/component/{uuid}/action", viewId),
+        ViewContextChange.class,
+        request));
   }
 
   @Override
-  public ViewContextChange performWidgetMainAction(UUID uuid, String widgetId,
+  public ViewContextChange performWidgetMainAction(ViewId viewId, WidgetId widgetId,
                                                    UiActionRequest request) {
-    return null;
+    return post(RequestSpec.of(
+        UriSpec.of("/component/{uuid}/{widgetId}/action", viewId, widgetId),
+        ViewContextChange.class,
+        request));
   }
 
   @Override
-  public ViewContextChange performWidgetAction(UUID uuid, String widgetId, String nodeId,
+  public ViewContextChange performWidgetAction(ViewId viewId,
+                                               WidgetId widgetId,
+                                               NodeId nodeId,
                                                UiActionRequest request) {
-    return null;
+    return post(RequestSpec.of(
+        UriSpec.of("/component/{uuid}/{widgetId}/{nodeId}/action", viewId, widgetId, nodeId),
+        ViewContextChange.class,
+        request));
   }
 
   @Override
-  public ViewContextChange dataChanged(UUID uuid, DataChange dataChangeEvent) {
-    return null;
+  public ViewContextChange dataChanged(ViewId viewId, DataChange dataChangeEvent) {
+    return post(RequestSpec.of(
+        UriSpec.of("/component/{uuid}/data", viewId.uuid()),
+        ViewContextChange.class,
+        dataChangeEvent));
   }
 
   @Override
-  public ViewContextChange uploadAction(UUID uuid, String uiActionRequest, String param,
+  public ViewContextChange uploadAction(ViewId viewId, String uiActionRequest, String param,
                                         MockMultipartFile content) {
-    return null;
+    return fail("Not yet implemented");
   }
 
   @Override
-  public ViewContextChange uploadMultipleAction(UUID uuid, String uiActionRequest, String param,
+  public ViewContextChange uploadMultipleAction(ViewId viewId, String uiActionRequest, String param,
                                                 List<MockMultipartFile> contents) {
-    return null;
+    return fail("Not yet implemented");
   }
 }

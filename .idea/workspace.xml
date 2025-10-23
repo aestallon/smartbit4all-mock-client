@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3bd8f65a-3a13-420d-b691-3c2c0ec0d981" name="Changes" comment="" />
+    <list default="true" id="3bd8f65a-3a13-420d-b691-3c2c0ec0d981" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/AbstractAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/RequestContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/newtype/NodeId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/newtype/SmartLinkId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/newtype/ViewContextId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/newtype/ViewId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/newtype/WidgetId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/util/StringUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/MockClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/MockClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/ComponentAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/ComponentAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/MockComponentAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/MockComponentAPI.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,8 +51,32 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;szabolcs-bazil-papp&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:aestallon/smartbit4all-mock-client.git&quot;,
+    &quot;accountId&quot;: &quot;bed5fe4d-c754-4fc0-801a-619a49fb0018&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/3.27.4/9d7aaef419ce67daa9bcee1827b8d7c7878fb6e/assertj-core-3.27.4-sources.jar!/org/assertj/core/api/Assertions.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/3.27.4/9d7aaef419ce67daa9bcee1827b8d7c7878fb6e/assertj-core-3.27.4-sources.jar!/org/assertj/core/api/Fail.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/3.27.4/9d7aaef419ce67daa9bcee1827b8d7c7878fb6e/assertj-core-3.27.4-sources.jar!/org/assertj/core/internal/Failures.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-test/6.2.11/f1f08a43c0d6db53918603592eeaf0f25a547b1/spring-test-6.2.11-sources.jar!/org/springframework/test/web/reactive/server/DefaultWebTestClient.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-test/6.2.11/f1f08a43c0d6db53918603592eeaf0f25a547b1/spring-test-6.2.11-sources.jar!/org/springframework/test/web/reactive/server/WebTestClient.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-test/6.2.11/f1f08a43c0d6db53918603592eeaf0f25a547b1/spring-test-6.2.11-sources.jar!/org/springframework/test/web/servlet/assertj/AbstractMockHttpServletResponseAssert.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -58,30 +96,33 @@
     <option name="showLibraryContents" value="true" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.restore.workspace.module&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon&quot;: &quot;&quot;,
-    &quot;org.rust.first.attach.projects&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.restore.workspace.module": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
+    "org.rust.first.attach.projects": "true",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -192,10 +233,24 @@
       <option name="presentableId" value="Default" />
       <updated>1760982973891</updated>
       <workItem from="1760982976556" duration="6731000" />
+      <workItem from="1761024092917" duration="388000" />
+      <workItem from="1761064138029" duration="8082000" />
+      <workItem from="1761244595507" duration="4828000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
