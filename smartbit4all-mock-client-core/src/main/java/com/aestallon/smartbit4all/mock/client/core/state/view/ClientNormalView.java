@@ -1,11 +1,10 @@
 package com.aestallon.smartbit4all.mock.client.core.state.view;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.smartbit4all.api.view.bean.ViewData;
-import com.aestallon.smartbit4all.mock.client.core.MockClient;
+import com.aestallon.smartbit4all.mock.client.core.client.MockClient;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.ViewId;
 
 public final class ClientNormalView extends ClientView {

@@ -1,18 +1,13 @@
 package com.aestallon.smartbit4all.mock.client.core.api.impl;
 
 import java.io.IOException;
-import java.net.http.HttpRequest;
 import java.util.Arrays;
 import java.util.Objects;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.web.reactive.function.BodyInserters;
-import com.aestallon.smartbit4all.mock.client.core.MockClient;
+import com.aestallon.smartbit4all.mock.client.core.client.MockClient;
 import com.aestallon.smartbit4all.mock.client.core.util.StringUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 
 abstract class AbstractAPI {
 

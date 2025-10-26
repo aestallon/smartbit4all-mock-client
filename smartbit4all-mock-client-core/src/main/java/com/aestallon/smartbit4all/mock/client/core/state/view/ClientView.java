@@ -2,17 +2,33 @@ package com.aestallon.smartbit4all.mock.client.core.state.view;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.assertj.core.api.Fail;
+import static org.assertj.core.api.InstanceOfAssertFactories.iterable;
 import org.smartbit4all.api.view.bean.ComponentModel;
+import org.smartbit4all.api.view.bean.UiAction;
 import org.smartbit4all.api.view.bean.ViewContextChange;
 import org.smartbit4all.api.view.bean.ViewData;
-import com.aestallon.smartbit4all.mock.client.core.MockClient;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.ViewId;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.WidgetId;
+import com.aestallon.smartbit4all.mock.client.core.client.MockClient;
 import com.aestallon.smartbit4all.mock.client.core.state.ClientComponent;
+import com.aestallon.smartbit4all.mock.client.core.state.component.interactable.Button;
+import com.aestallon.smartbit4all.mock.client.core.state.component.layout.AbstractWidget;
+import com.aestallon.smartbit4all.mock.client.core.state.component.layout.CompositeLayout;
+import com.aestallon.smartbit4all.mock.client.core.state.component.layout.DeferredInitWidget;
+import com.aestallon.smartbit4all.mock.client.core.state.component.layout.Form;
+import com.aestallon.smartbit4all.mock.client.core.state.component.layout.Toolbar;
+import com.aestallon.smartbit4all.mock.client.core.state.component.layout.WidgetKey;
 
+/*
+ *
+ */
 public abstract sealed class ClientView
     extends ClientComponent
     permits ClientDialogView, ClientNormalView {
@@ -24,6 +40,8 @@ public abstract sealed class ClientView
 
   protected ComponentModel model;
 
+  protected final CompositeLayout rootLayout;
+
   protected ClientView(MockClient client, ViewId id, String name) {
     this(client, id, name, null);
   }
@@ -33,6 +51,9 @@ public abstract sealed class ClientView
     this.id = id;
     this.name = name;
     this.parent = parent;
+
+    rootLayout = new CompositeLayout(this);
+    rootLayout.add(new Toolbar(this));
   }
 
   public ViewId id() {
@@ -42,19 +63,65 @@ public abstract sealed class ClientView
   public void id(ViewId id) {
     this.id = id;
   }
+  
+  public String name() {
+    return name;
+  }
 
   public Optional<ClientView> parent() {
     return Optional.ofNullable(parent);
   }
 
   public void componentModel(ComponentModel componentModel) {
-    this.model = componentModel;
+    model = componentModel;
+    model.getLayouts().forEach((formId, formDef) -> {
+      rootLayout.add(new Form.Key.Custom(formId), formDef);
+    });
+    
+    final List<DeferredInitWidget<?, ?>> deferredInitWidgets = new ArrayList<>();
+    model.getComponentLayouts().forEach((layoutId, layoutDef) -> {
+      deferredInitWidgets.addAll(rootLayout.add(
+          new CompositeLayout.Key.Custom(layoutId),
+          layoutDef));
+    });
+    rootLayout.add(model.getActions());
+
+    deferredInitWidgets.forEach(DeferredInitWidget::init);
   }
 
   public ComponentModel componentModel() {
     return model;
   }
-  
+
+  public void setData(String[] dataPath, Object o) {
+    if (dataPath == null || dataPath.length < 1) {
+      Fail.fail("Cannot set value " + o + " on null or empty data path!");
+      return;
+    }
+
+    Map<String, Object> map;
+    if (model.getData() instanceof Map<?, ?> m) {
+      @SuppressWarnings("unchecked")
+      final var temp = (Map<String, Object>) m;
+      map = temp;
+    } else {
+      map = new LinkedHashMap<>();
+      model.setData(map);
+    }
+
+    for (int i = 0; i < dataPath.length - 1; i++) {
+      map = ensureNestedValue(map, dataPath[i]);
+    }
+    map.put(dataPath[dataPath.length - 1], o);
+  }
+
+
+  @SuppressWarnings("unchecked")
+  private Map<String, Object> ensureNestedValue(Map<String, Object> m, String k) {
+    Object v = m.computeIfAbsent(k, k1 -> new LinkedHashMap<String, Object>());
+    return (Map<String, Object>) v;
+  }
+
   public void ensureLoaded() {
     if (model == null) {
       load();
@@ -80,7 +147,7 @@ public abstract sealed class ClientView
     dialogs.add(dialog);
     return dialog;
   }
-  
+
   public void drop(ClientView view) {
     if (view instanceof ClientDialogView dialog) {
       dialogs.remove(dialog);
@@ -89,6 +156,16 @@ public abstract sealed class ClientView
 
   public void onWidgetChanges(Collection<WidgetId> changedWidgets) {
 
+  }
+
+  protected <T extends AbstractWidget<T, K>, K extends WidgetKey<T>> Optional<T> getWidget(K key) {
+    return rootLayout.getWidget(key);
+  }
+  
+  public Optional<UiAction> action(String label) {
+    return model.getActions().stream()
+        .filter(it -> it.getDescriptor() != null && label.equals(it.getDescriptor().getTitle()))
+        .findFirst();
   }
 
 }

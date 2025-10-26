@@ -1,24 +1,61 @@
 package com.aestallon.smartbit4all.mock.client.core.state.component.layout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import com.aestallon.smartbit4all.mock.client.core.MockClient;
-import com.aestallon.smartbit4all.mock.client.core.state.component.Button;
-import com.aestallon.smartbit4all.mock.client.core.state.component.ViewComponent;
+import java.util.Optional;
+import com.aestallon.smartbit4all.mock.client.core.api.newtype.WidgetId;
+import com.aestallon.smartbit4all.mock.client.core.state.component.interactable.Button;
 import com.aestallon.smartbit4all.mock.client.core.state.view.ClientView;
 
-public class Toolbar extends ViewComponent {
+public final class Toolbar extends AbstractWidget<Toolbar, Toolbar.Key> {
 
-  public record Id(String strVal) {}
+  public sealed interface Key extends WidgetKey<Toolbar> {
+
+    record Custom(String strVal) implements Key {
+
+      @Override
+      public WidgetId asId() {
+        return new WidgetId(strVal);
+      }
+    }
 
 
-  private final Toolbar.Id id;
+    record Default() implements Key {
+      public static final Key.Default INSTANCE = new Key.Default();
+
+      @Override
+      public WidgetId asId() {
+        return null;
+      }
+
+    }
+
+  }
+
+
   private final List<Button> buttons;
 
-  public Toolbar(MockClient client, ClientView view, Toolbar.Id id) {
-    super(client, view);
-    this.id = id;
+  public Toolbar(ClientView view) {
+    this(view, Key.Default.INSTANCE);
+  }
+
+  public Toolbar(ClientView view, Key id) {
+    super(view, id);
     this.buttons = new ArrayList<>();
+  }
+
+  public List<Button> buttons() {
+    return Collections.unmodifiableList(buttons);
+  }
+
+  public void buttons(List<Button> buttons) {
+    this.buttons.clear();
+    this.buttons.addAll(buttons);
+  }
+
+  public Optional<Button> button(final String code) {
+    return Optional.empty();
   }
 
 }
