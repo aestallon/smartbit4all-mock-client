@@ -1,10 +1,18 @@
 package com.aestallon.smartbit4all.mock.client.core.api.impl;
 
+import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.util.Arrays;
 import java.util.Objects;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.web.reactive.function.BodyInserters;
+import com.aestallon.smartbit4all.mock.client.core.MockClient;
 import com.aestallon.smartbit4all.mock.client.core.util.StringUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 abstract class AbstractAPI {
 
@@ -68,7 +76,8 @@ abstract class AbstractAPI {
     }
 
   }
-  
+
+
   protected static final String HEADER_VIEW_CONTEXT_UUID = "viewContextUuid";
   protected static final String HEADER_AUTHORIZATION = "Authorization";
 
@@ -90,12 +99,17 @@ abstract class AbstractAPI {
   }
 
   protected final <T> T get(RequestSpec<T> requestSpec) {
-    return setHeadersAndExchange(client.get(), requestSpec);
+    return setHeadersAndExchange(client.get().uri(
+        requestContext.basePath() + requestSpec.uriSpec.template,
+        requestSpec.uriSpec.vars), requestSpec);
   }
 
   protected final <T> T delete(RequestSpec<T> requestSpec) {
-    return setHeadersAndExchange(client.delete(), requestSpec);
+    return setHeadersAndExchange(client.delete().uri(
+        requestContext.basePath() + requestSpec.uriSpec.template,
+        requestSpec.uriSpec.vars), requestSpec);
   }
+  
 
   private <T> T exchange(WebTestClient.RequestBodyUriSpec ex, RequestSpec<T> requestSpec) {
     WebTestClient.RequestBodySpec body = ex.uri(
@@ -104,7 +118,13 @@ abstract class AbstractAPI {
 
     WebTestClient.RequestHeadersSpec<?> spec;
     if (requestSpec.body != null) {
-      spec = body.contentType(MediaType.APPLICATION_JSON).bodyValue(body);
+      try {
+        spec = body
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(MockClient.OBJECT_MAPPER.writeValueAsString(requestSpec.body));
+      } catch (JsonProcessingException e) {
+        throw new AssertionError(e);
+      }
     } else {
       spec = body;
     }
@@ -113,7 +133,7 @@ abstract class AbstractAPI {
 
   private <T> T setHeadersAndExchange(WebTestClient.RequestHeadersSpec<?> spec,
                                       RequestSpec<T> requestSpec) {
-    final var request = spec.headers(headers -> {
+    final var request = spec.accept(MediaType.APPLICATION_JSON).headers(headers -> {
       if (requestContext.viewContextId() != null) {
         headers.set(HEADER_VIEW_CONTEXT_UUID, requestContext.viewContextId().toString());
       } else {
@@ -131,7 +151,12 @@ abstract class AbstractAPI {
       return null;
     }
 
-    return response.expectBody(requestSpec.responseType).returnResult().getResponseBody();
+    byte[] responseBody = response.expectBody().returnResult().getResponseBody();
+    try {
+      return MockClient.OBJECT_MAPPER.readValue(responseBody, requestSpec.responseType);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
 }
