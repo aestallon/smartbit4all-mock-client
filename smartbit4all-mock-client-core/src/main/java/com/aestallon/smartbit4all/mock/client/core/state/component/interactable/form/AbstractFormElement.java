@@ -2,7 +2,7 @@ package com.aestallon.smartbit4all.mock.client.core.state.component.interactable
 
 import com.aestallon.smartbit4all.mock.client.core.state.component.layout.Form;
 
-public class AbstractFormElement<T> implements FormElement {
+public abstract class AbstractFormElement<T> implements FormElement {
 
   protected final Form form;
   protected final String[] dataPath;

@@ -3,9 +3,13 @@ package com.aestallon.smartbit4all.mock.client.core.api.impl;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import com.aestallon.smartbit4all.mock.client.core.client.MockClient;
+import com.aestallon.smartbit4all.mock.client.core.exception.ClientExceptionContext;
+import com.aestallon.smartbit4all.mock.client.core.exception.NetworkExchangeException;
 import com.aestallon.smartbit4all.mock.client.core.util.StringUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -118,7 +122,7 @@ abstract class AbstractAPI {
             .contentType(MediaType.APPLICATION_JSON)
             .bodyValue(MockClient.OBJECT_MAPPER.writeValueAsString(requestSpec.body));
       } catch (JsonProcessingException e) {
-        throw new AssertionError(e);
+        throw new NetworkExchangeException(new ClientExceptionContext(), e);
       }
     } else {
       spec = body;
@@ -146,11 +150,13 @@ abstract class AbstractAPI {
       return null;
     }
 
-    byte[] responseBody = response.expectBody().returnResult().getResponseBody();
+    EntityExchangeResult<byte[]> entityExchangeResult = response.expectBody().returnResult();
+    HttpStatusCode status = entityExchangeResult.getStatus();
+    byte[] responseBody = entityExchangeResult.getResponseBody();
     try {
       return MockClient.OBJECT_MAPPER.readValue(responseBody, requestSpec.responseType);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new NetworkExchangeException(new ClientExceptionContext(), e);
     }
   }
 

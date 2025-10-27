@@ -30,6 +30,7 @@ public final class ClientNormalView extends ClientView {
     final var childId = new ViewId(viewData.getUuid());
     final var name = viewData.getViewName();
     final var parentId = new ViewId(viewData.getContainerUuid());
+    // TODO: Throw appropriate ClientException
     assertThat(parentId).isEqualTo(id);
 
     child = new ClientNormalView(client, childId, name, this);

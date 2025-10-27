@@ -1,0 +1,58 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+skinparam component {
+  FontSize 13
+  Style Rectangle
+  FontName Courier
+  BorderColor black
+  BackgroundColor transparent
+  
+  BackgroundColor<<View>> LightGrey
+  BorderColor<<View>> Black
+  
+  BackgroundColor<<Toolbar>> Yellow
+  BorderColor<<Toolbar>> Gold
+  
+  BackgroundColor<<PrimaryButton>> LightBlue
+  BorderColor<<PrimaryButton>> Blue
+  
+  BackgroundColor<<Button>> White
+  BorderColor<<Button>> Grey
+  
+  BackgroundColor<<Grid>> LightGreen
+  BorderColor<<Grid>> Green
+}
+
+component Home as "Home" << View >> {
+
+  component "Default Toolbar" as "HomeDefaultToolbar" << Toolbar >> {
+component "New" as "HomeDefaultToolbarNew" << PrimaryButton >> {
+}
+
+component "Admin" as "HomeDefaultToolbarAdmin" << Button >> {
+}
+}
+  
+  component "MainContainer" as "MainContainer" << View >> {
+
+    component "Default Toolbar" as "MainContainerDefaultToolbar" << Toolbar >> {
+      component "New" as "MainContainerDefaultToolbarNew" << PrimaryButton >> {
+      }
+      component "Admin" as "MainContainerDefaultToolbarAdmin" << Button >> {
+      }
+    }
+    
+    component "results_grid" as "MainContainerresults_grid" << Grid >> {
+    }
+    
+    component "Main" as "Main" << View >> {
+        component "Default Toolbar" as "MainDefaultToolbar" << Toolbar >> {
+        }
+    }
+    
+  }
+}
+
+"HomeDefaultToolbarNew" -right-> "HomeDefaultToolbarAdmin"
+@enduml

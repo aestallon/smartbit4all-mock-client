@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.smartbit4all.api.formdefinition.bean.SmartLayoutDefinition;
 import org.smartbit4all.api.smartcomponentlayoutdefinition.bean.SmartComponentLayoutDefinition;
 import org.smartbit4all.api.view.bean.UiAction;
@@ -15,6 +17,9 @@ import com.aestallon.smartbit4all.mock.client.core.state.component.interactable.
 import com.aestallon.smartbit4all.mock.client.core.state.view.ClientView;
 
 public final class CompositeLayout extends AbstractWidget<CompositeLayout, CompositeLayout.Key> {
+
+  private static final Logger log = LoggerFactory.getLogger(CompositeLayout.class);
+
 
   public enum Orientation { HORIZONTAL, VERTICAL }
 
@@ -67,7 +72,10 @@ public final class CompositeLayout extends AbstractWidget<CompositeLayout, Compo
   }
 
   public Form add(Form.Key key, SmartLayoutDefinition formDef) {
-    return null;
+    final var form = new Form(view, key);
+    add(form);
+    form.createWidgets(formDef);
+    return form;
   }
 
   public List<DeferredInitWidget<?, ?>> add(SmartComponentLayoutDefinition layoutDef) {
@@ -80,8 +88,23 @@ public final class CompositeLayout extends AbstractWidget<CompositeLayout, Compo
   }
 
   public void add(List<UiAction> actions) {
-    Map<Toolbar.Key, Toolbar> collect = getWidgets(Toolbar.class)
+    final Map<Toolbar.Key, Toolbar> toolbars = getWidgets(Toolbar.class)
         .collect(Collectors.toMap(Toolbar::id, it -> it));
+    for (final var action : actions) {
+      final var toolbarKey = Toolbar.Key.fromString(action.getToolbar());
+      final var toolbar = toolbars.get(toolbarKey);
+      if (toolbar == null) {
+        // TODO: Set ImplicitElementStrategy in client: FAIL, WARN, IGNORE or ASSUME
+        log.warn(
+            "Action {} refers to non-existent toolbar: {}. Is the toolbar implicit?", 
+            action, toolbarKey);
+        final var implicitToolbar = new Toolbar(view(), toolbarKey);
+        add(implicitToolbar);
+        implicitToolbar.add(action);
+      } else {
+        toolbar.add(action);
+      }
+    }
   }
 
   public Grid add(Grid.Key key) {
@@ -109,7 +132,7 @@ public final class CompositeLayout extends AbstractWidget<CompositeLayout, Compo
   public <T extends AbstractWidget<T, K>, K extends WidgetKey<T>> Stream<T> getWidgets(
       Class<T> widgetType) {
     return stream()
-        .filter(it -> widgetType.isAssignableFrom(widgetType))
+        .filter(widgetType::isInstance)
         .map(this::coerce);
   }
 

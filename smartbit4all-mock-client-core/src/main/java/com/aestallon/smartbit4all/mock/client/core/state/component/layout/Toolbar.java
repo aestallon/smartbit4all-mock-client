@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import org.smartbit4all.api.view.bean.UiAction;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.WidgetId;
 import com.aestallon.smartbit4all.mock.client.core.state.component.interactable.Button;
 import com.aestallon.smartbit4all.mock.client.core.state.view.ClientView;
+import com.google.common.base.Strings;
 
 public final class Toolbar extends AbstractWidget<Toolbar, Toolbar.Key> {
 
   public sealed interface Key extends WidgetKey<Toolbar> {
+
+    static Toolbar.Key fromString(String strVal) {
+      return Strings.isNullOrEmpty(strVal) ? Default.INSTANCE : new Toolbar.Key.Custom(strVal);
+    }
 
     record Custom(String strVal) implements Key {
 
@@ -43,6 +49,10 @@ public final class Toolbar extends AbstractWidget<Toolbar, Toolbar.Key> {
   public Toolbar(ClientView view, Key id) {
     super(view, id);
     this.buttons = new ArrayList<>();
+  }
+
+  public void add(UiAction action) {
+    buttons.add(new Button(this, action));
   }
 
   public List<Button> buttons() {

@@ -21,7 +21,10 @@ class MockClientTest {
         .withLocalAuthentication(USERNAME, PASSWORD)
         .withLaunchCall("/home/start")
         .build();
-    client.view("Home").button("Törzsadatok").click();
+    // client.view("Home").button("Törzsadatok").click();
+    // client.view("Admin").button("Felhasználók").click();
+    client.view("MainContainer").button("Új dosszié").click();
+    
     client.api();
   }
   

@@ -23,6 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.aestallon.smartbit4all.mock.client.core.api.impl.RequestContext;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.ViewContextId;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.ViewId;
+import com.aestallon.smartbit4all.mock.client.core.state.component.interactable.Button;
 import com.aestallon.smartbit4all.mock.client.core.state.view.ClientView;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -81,6 +82,7 @@ public class MockClient {
 
   void startViewContext() {
     ViewContextData viewContext = api.component().createViewContext();
+    // TODO: Throw appropriate ClientException
     assertThat(viewContext)
         .withFailMessage(() -> "Failure to create view context!")
         .isNotNull();
@@ -89,6 +91,7 @@ public class MockClient {
 
   void syncViewContext() {
     final var viewContext = api.component().getViewContext(viewContextId);
+    // TODO: Throw appropriate ClientException
     assertThat(viewContext.getUuid()).isEqualTo(viewContextId.uuid());
     onViewContextChange(viewContext);
   }
@@ -111,6 +114,7 @@ public class MockClient {
     for (final var change : changes) {
       final ClientView clientView = repository.get(new ViewId(change.getUuid()));
       if (clientView == null) {
+        // TODO: Throw appropriate ClientException
         Fail.fail("Cannot process Component model change, for cannot find view by ID: "
                   + change.getUuid());
         return;
@@ -125,6 +129,7 @@ public class MockClient {
               ComponentModel.class);
           clientView.componentModel(model);
         } catch (IOException e) {
+          // TODO: Throw appropriate ClientException
           Fail.fail(e);
         }
       }
@@ -145,6 +150,7 @@ public class MockClient {
 
     opened.stream().map(repository::get).forEach(ClientView::ensureLoaded);
     List<ViewId> closedIds = toClose.stream().map(ViewData::getUuid).map(ViewId::new).toList();
+    closedIds.forEach(repository::close);
     List<ClientView> openedViews = toOpen.stream().map(repository::add).toList();
 
     final var update = new ViewContextUpdate()
@@ -212,15 +218,8 @@ public class MockClient {
 
     public void click() {
       client.repository.find(parent.name)
-          .ifPresent(view -> view.action(label)
-              .ifPresent(action -> {
-                final var change = client
-                    .api().component()
-                    .performAction(view.id(), new UiActionRequest()
-                        .code(action.getCode())
-                        .putParamsItem("model", view.componentModel().getData()));
-                client.onViewContextChange(change);
-              }));
+          .flatMap(view -> view.button(label))
+          .ifPresent(Button::click);
     }
 
     public boolean isEnabled() { return true; }

@@ -2,16 +2,13 @@ package com.aestallon.smartbit4all.mock.client.core.state.view;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.assertj.core.api.Fail;
-import static org.assertj.core.api.InstanceOfAssertFactories.iterable;
 import org.smartbit4all.api.view.bean.ComponentModel;
-import org.smartbit4all.api.view.bean.UiAction;
 import org.smartbit4all.api.view.bean.ViewContextChange;
 import org.smartbit4all.api.view.bean.ViewData;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.ViewId;
@@ -26,9 +23,6 @@ import com.aestallon.smartbit4all.mock.client.core.state.component.layout.Form;
 import com.aestallon.smartbit4all.mock.client.core.state.component.layout.Toolbar;
 import com.aestallon.smartbit4all.mock.client.core.state.component.layout.WidgetKey;
 
-/*
- *
- */
 public abstract sealed class ClientView
     extends ClientComponent
     permits ClientDialogView, ClientNormalView {
@@ -63,7 +57,7 @@ public abstract sealed class ClientView
   public void id(ViewId id) {
     this.id = id;
   }
-  
+
   public String name() {
     return name;
   }
@@ -77,7 +71,7 @@ public abstract sealed class ClientView
     model.getLayouts().forEach((formId, formDef) -> {
       rootLayout.add(new Form.Key.Custom(formId), formDef);
     });
-    
+
     final List<DeferredInitWidget<?, ?>> deferredInitWidgets = new ArrayList<>();
     model.getComponentLayouts().forEach((layoutId, layoutDef) -> {
       deferredInitWidgets.addAll(rootLayout.add(
@@ -95,6 +89,7 @@ public abstract sealed class ClientView
 
   public void setData(String[] dataPath, Object o) {
     if (dataPath == null || dataPath.length < 1) {
+      // TODO: Throw appropriate ClientException
       Fail.fail("Cannot set value " + o + " on null or empty data path!");
       return;
     }
@@ -141,6 +136,7 @@ public abstract sealed class ClientView
     final var dialogId = new ViewId(viewData.getUuid());
     final var name = viewData.getViewName();
     final var parentId = new ViewId(viewData.getContainerUuid());
+    // TODO: Throw appropriate ClientException
     assertThat(parentId).isEqualTo(id);
 
     final var dialog = new ClientDialogView(client, dialogId, name, this);
@@ -161,10 +157,11 @@ public abstract sealed class ClientView
   protected <T extends AbstractWidget<T, K>, K extends WidgetKey<T>> Optional<T> getWidget(K key) {
     return rootLayout.getWidget(key);
   }
-  
-  public Optional<UiAction> action(String label) {
-    return model.getActions().stream()
-        .filter(it -> it.getDescriptor() != null && label.equals(it.getDescriptor().getTitle()))
+
+  public Optional<Button> button(String label) {
+    return rootLayout.getWidgets(Toolbar.class)
+        .flatMap(it -> it.buttons().stream())
+        .filter(it -> label.equals(it.label()))
         .findFirst();
   }
 
