@@ -1,12 +1,14 @@
 package com.aestallon.smartbit4all.mock.client.core.exception;
 
+import com.aestallon.smartbit4all.mock.client.core.client.InteractionContext;
+
 public final class NetworkExchangeException extends ClientException {
 
-  public NetworkExchangeException(ClientExceptionContext ctx) {
+  public NetworkExchangeException(InteractionContext ctx) {
     super(ctx);
   }
   
-  public NetworkExchangeException(ClientExceptionContext ctx, Throwable cause) {
+  public NetworkExchangeException(InteractionContext ctx, Throwable cause) {
     super(ctx, cause);
   }
 

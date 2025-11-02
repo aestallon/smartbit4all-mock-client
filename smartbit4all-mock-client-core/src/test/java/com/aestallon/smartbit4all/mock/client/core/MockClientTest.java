@@ -1,15 +1,17 @@
 package com.aestallon.smartbit4all.mock.client.core;
 
 import java.net.http.HttpClient;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.client.reactive.JdkClientHttpConnector;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import com.aestallon.smartbit4all.mock.client.core.client.MockClient;
 
 class MockClientTest {
-  
+
   private static final String USERNAME = "redacted";
   private static final String PASSWORD = USERNAME;
+
   @Test
   void foo() {
     final WebTestClient httpClient = WebTestClient.bindToServer()
@@ -21,13 +23,13 @@ class MockClientTest {
         .withLocalAuthentication(USERNAME, PASSWORD)
         .withLaunchCall("/home/start")
         .build();
-    // client.view("Home").button("Törzsadatok").click();
-    // client.view("Admin").button("Felhasználók").click();
-    client.view("MainContainer").button("Új dosszié").click();
-    
+    client
+        .view("MainContainer")
+        .buttonLabelled("Új dosszié").click();
+    // client.view("alma").buttonLabelled("béla").click();
     client.api();
   }
-  
-  
+
+
 
 }

@@ -4,14 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.assertj.core.api.Fail;
 import org.smartbit4all.api.session.bean.SessionInfoData;
 import org.smartbit4all.api.view.bean.ComponentModel;
 import org.smartbit4all.api.view.bean.ComponentModelChange;
-import org.smartbit4all.api.view.bean.UiActionRequest;
 import org.smartbit4all.api.view.bean.ViewContextChange;
 import org.smartbit4all.api.view.bean.ViewContextData;
 import org.smartbit4all.api.view.bean.ViewContextUpdate;
@@ -23,7 +21,8 @@ import org.springframework.web.context.WebApplicationContext;
 import com.aestallon.smartbit4all.mock.client.core.api.impl.RequestContext;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.ViewContextId;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.ViewId;
-import com.aestallon.smartbit4all.mock.client.core.state.component.interactable.Button;
+import com.aestallon.smartbit4all.mock.client.core.assertj.ComponentLocationResult;
+import com.aestallon.smartbit4all.mock.client.core.assertj.ViewHandle;
 import com.aestallon.smartbit4all.mock.client.core.state.view.ClientView;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,6 +38,10 @@ public class MockClient {
       .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
       .build()
       .registerModule(new JavaTimeModule());
+  
+  public static <T> T coerceType(Object o,  Class<T> type) {
+    return OBJECT_MAPPER.convertValue(o, type);
+  }
 
   public static MockClientBuilder local(WebApplicationContext applicationContext) {
     return new MockClientBuilder(applicationContext);
@@ -176,80 +179,13 @@ public class MockClient {
 
   // Minimal view scaffolding to allow fluent test code to compile
   public ViewHandle view(String name) {
-    return new ViewHandle(name, this);
+    return new ViewHandle(() -> repository.find(name)
+        .map(ComponentLocationResult::some)
+        .orElseGet(() -> ComponentLocationResult.none(
+            "View[ " + name + " ]",
+            "View[ " + name + " ] was not present among the open views. Open views were:\n"
+            + repository.report())));
   }
 
 
-  // --- Minimal wrapper types for test-time fluent calls ---
-  public static final class ViewHandle {
-    private final String name;
-    private final MockClient client;
-
-    private ViewHandle(String name, MockClient client) {
-      this.name = name;
-      this.client = client;
-    }
-
-    public Optional<ViewHandle> asOptional() { return Optional.of(this); }
-
-    public ButtonHandle button(String label) {
-      return new ButtonHandle(label, this, client);
-    }
-
-    public FieldHandle field(String id) { return new FieldHandle(id); }
-
-    public GridHandle grid(String id) { return new GridHandle(id); }
-
-    @Override
-    public String toString() { return "ViewHandle{" + name + '}'; }
-  }
-
-
-  public static final class ButtonHandle {
-    private final String label;
-    private final ViewHandle parent;
-    private final MockClient client;
-
-    private ButtonHandle(String label, ViewHandle parent, MockClient client) {
-      this.label = label;
-      this.parent = parent;
-      this.client = client;
-    }
-
-    public void click() {
-      client.repository.find(parent.name)
-          .flatMap(view -> view.button(label))
-          .ifPresent(Button::click);
-    }
-
-    public boolean isEnabled() { return true; }
-
-    @Override
-    public String toString() { return "Button{" + label + '}'; }
-  }
-
-
-  public static final class FieldHandle {
-    private final String id;
-    private String value;
-
-    private FieldHandle(String id) { this.id = id; }
-
-    public void setValue(String value) { this.value = value; }
-
-    public String getValue() { return value; }
-
-    @Override
-    public String toString() { return "Field{" + id + '=' + value + '}'; }
-  }
-
-
-  public static final class GridHandle {
-    private final String id;
-
-    private GridHandle(String id) { this.id = id; }
-
-    @Override
-    public String toString() { return "Grid{" + id + '}'; }
-  }
 }

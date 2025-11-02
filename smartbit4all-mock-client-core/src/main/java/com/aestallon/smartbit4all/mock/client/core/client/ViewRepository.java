@@ -1,6 +1,7 @@
 package com.aestallon.smartbit4all.mock.client.core.client;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.assertj.core.api.Fail;
@@ -71,6 +72,10 @@ final class ViewRepository {
   
   Optional<ClientView> find(String viewName) {
     return views.values().stream().filter(it -> it.name().equals(viewName)).findFirst();
+  }
+  
+  String report() {
+    return hasRoot() ? root.toString() : "No views present";
   }
 
 }

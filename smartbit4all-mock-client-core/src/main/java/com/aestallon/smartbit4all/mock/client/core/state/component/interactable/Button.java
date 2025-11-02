@@ -2,18 +2,17 @@ package com.aestallon.smartbit4all.mock.client.core.state.component.interactable
 
 import org.smartbit4all.api.view.bean.UiAction;
 import org.smartbit4all.api.view.bean.UiActionRequest;
-import com.aestallon.smartbit4all.mock.client.core.client.MockClient;
+import com.aestallon.smartbit4all.mock.client.core.state.component.ViewComponent;
 import com.aestallon.smartbit4all.mock.client.core.state.component.layout.Toolbar;
 
-public final class Button {
+public final class Button extends ViewComponent {
 
   private final Toolbar toolbar;
-  private final MockClient client;
   private final UiAction action;
 
   public Button(Toolbar toolbar, UiAction action) {
+    super(toolbar.view());
     this.toolbar = toolbar;
-    this.client = toolbar.client();
     this.action = action;
   }
 

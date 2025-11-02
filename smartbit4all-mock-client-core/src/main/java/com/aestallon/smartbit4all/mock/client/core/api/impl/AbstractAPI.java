@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import com.aestallon.smartbit4all.mock.client.core.client.MockClient;
-import com.aestallon.smartbit4all.mock.client.core.exception.ClientExceptionContext;
+import com.aestallon.smartbit4all.mock.client.core.client.InteractionContext;
 import com.aestallon.smartbit4all.mock.client.core.exception.NetworkExchangeException;
 import com.aestallon.smartbit4all.mock.client.core.util.StringUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -122,7 +122,7 @@ abstract class AbstractAPI {
             .contentType(MediaType.APPLICATION_JSON)
             .bodyValue(MockClient.OBJECT_MAPPER.writeValueAsString(requestSpec.body));
       } catch (JsonProcessingException e) {
-        throw new NetworkExchangeException(new ClientExceptionContext(), e);
+        throw new NetworkExchangeException(new InteractionContext(), e);
       }
     } else {
       spec = body;
@@ -156,7 +156,7 @@ abstract class AbstractAPI {
     try {
       return MockClient.OBJECT_MAPPER.readValue(responseBody, requestSpec.responseType);
     } catch (IOException e) {
-      throw new NetworkExchangeException(new ClientExceptionContext(), e);
+      throw new NetworkExchangeException(new InteractionContext(), e);
     }
   }
 

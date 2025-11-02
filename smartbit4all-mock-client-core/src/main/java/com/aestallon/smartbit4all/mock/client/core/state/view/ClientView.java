@@ -22,6 +22,7 @@ import com.aestallon.smartbit4all.mock.client.core.state.component.layout.Deferr
 import com.aestallon.smartbit4all.mock.client.core.state.component.layout.Form;
 import com.aestallon.smartbit4all.mock.client.core.state.component.layout.Toolbar;
 import com.aestallon.smartbit4all.mock.client.core.state.component.layout.WidgetKey;
+import com.aestallon.smartbit4all.mock.client.core.util.StringUtil;
 
 public abstract sealed class ClientView
     extends ClientComponent
@@ -165,4 +166,18 @@ public abstract sealed class ClientView
         .findFirst();
   }
 
+  @Override
+  public String toString() {
+    final var sb = new StringBuilder("View [ name: " + name + " ][ id: " + id + " ]");
+    if (dialogs.isEmpty()) {
+      return sb.toString();
+    }
+  
+    sb.append("\nDialogs:");
+    for (var dialog : dialogs) {
+      sb.append(StringUtil.toIndentedString("\n- " + dialog.toString()));
+    }
+    return sb.toString();
+
+  }
 }
