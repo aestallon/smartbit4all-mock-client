@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/../../../../develop_21/platform" />
     <file type="web" url="file://$PROJECT_DIR$/../platform-jdk21-silent-mode-20250706" />
     <file type="web" url="file://$PROJECT_DIR$" />
   </component>

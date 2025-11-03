@@ -166,13 +166,19 @@ public abstract sealed class ClientView
         .findFirst();
   }
 
+  public List<Button> buttons() {
+    return rootLayout.getWidgets(Toolbar.class)
+        .flatMap(it -> it.buttons().stream())
+        .toList();
+  }
+
   @Override
   public String toString() {
     final var sb = new StringBuilder("View [ name: " + name + " ][ id: " + id + " ]");
     if (dialogs.isEmpty()) {
       return sb.toString();
     }
-  
+
     sb.append("\nDialogs:");
     for (var dialog : dialogs) {
       sb.append(StringUtil.toIndentedString("\n- " + dialog.toString()));

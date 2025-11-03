@@ -1,6 +1,7 @@
 package com.aestallon.smartbit4all.mock.client.core.state.component.interactable;
 
 import org.smartbit4all.api.view.bean.UiAction;
+import org.smartbit4all.api.view.bean.UiActionDescriptor;
 import org.smartbit4all.api.view.bean.UiActionRequest;
 import com.aestallon.smartbit4all.mock.client.core.state.component.ViewComponent;
 import com.aestallon.smartbit4all.mock.client.core.state.component.layout.Toolbar;
@@ -37,6 +38,14 @@ public final class Button extends ViewComponent {
         .api().component()
         .performAction(toolbar.view().id(), request);
     client.onViewContextChange(change);
+  }
+  
+  public UiAction action() {
+    return action;
+  }
+  
+  public UiActionDescriptor descriptor() {
+    return action.getDescriptor();
   }
 
 }
