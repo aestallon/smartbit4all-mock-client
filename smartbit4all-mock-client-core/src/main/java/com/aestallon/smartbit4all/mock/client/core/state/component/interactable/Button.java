@@ -22,7 +22,8 @@ public final class Button extends ViewComponent {
   }
 
   public String label() {
-    return action.getDescriptor().getTitle();
+    final var descriptor = descriptor();
+    return descriptor != null ? descriptor.getTitle() : null;
   }
 
   public void click() {
@@ -48,4 +49,9 @@ public final class Button extends ViewComponent {
     return action.getDescriptor();
   }
 
+  @Override
+  public String toString() {
+    return "Button [ code: " + code() + " ][ label: " + label() + " ]"; 
+  }
+  
 }

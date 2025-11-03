@@ -159,6 +159,18 @@ public abstract sealed class ClientView
     return rootLayout.getWidget(key);
   }
 
+  public Optional<Toolbar> toolbar(String identifier) {
+    return rootLayout.getWidget(new Toolbar.Key.Custom(identifier));
+  }
+
+  public Toolbar toolbar() {
+    return rootLayout.getWidget(Toolbar.Key.Default.INSTANCE).orElseThrow();
+  }
+
+  public List<Toolbar> toolbars() {
+    return rootLayout.getWidgets(Toolbar.class).toList();
+  }
+
   public Optional<Button> button(String label) {
     return rootLayout.getWidgets(Toolbar.class)
         .flatMap(it -> it.buttons().stream())
@@ -174,14 +186,17 @@ public abstract sealed class ClientView
 
   @Override
   public String toString() {
-    final var sb = new StringBuilder("View [ name: " + name + " ][ id: " + id + " ]");
+    return "View [ name: " + name + " ][ id: " + id + " ]";
+  }
+  public String toFullString() {
+    final var sb = new StringBuilder(toString());
     if (dialogs.isEmpty()) {
       return sb.toString();
     }
 
     sb.append("\nDialogs:");
     for (var dialog : dialogs) {
-      sb.append(StringUtil.toIndentedString("\n- " + dialog.toString()));
+      sb.append(StringUtil.toIndentedString("\n- " + dialog.toFullString()));
     }
     return sb.toString();
 

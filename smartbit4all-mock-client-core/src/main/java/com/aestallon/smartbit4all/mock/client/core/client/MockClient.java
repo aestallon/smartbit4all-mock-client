@@ -10,6 +10,7 @@ import org.assertj.core.api.Fail;
 import org.smartbit4all.api.session.bean.SessionInfoData;
 import org.smartbit4all.api.view.bean.ComponentModel;
 import org.smartbit4all.api.view.bean.ComponentModelChange;
+import org.smartbit4all.api.view.bean.UiActionRequest;
 import org.smartbit4all.api.view.bean.ViewContextChange;
 import org.smartbit4all.api.view.bean.ViewContextData;
 import org.smartbit4all.api.view.bean.ViewContextUpdate;
@@ -38,8 +39,8 @@ public class MockClient {
       .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
       .build()
       .registerModule(new JavaTimeModule());
-  
-  public static <T> T coerceType(Object o,  Class<T> type) {
+
+  public static <T> T coerceType(Object o, Class<T> type) {
     return OBJECT_MAPPER.convertValue(o, type);
   }
 
@@ -75,11 +76,11 @@ public class MockClient {
     return webClient;
   }
 
-  void startSession() {
-    sessionInfoData = api.session().startSession();
+  void startSession(InteractionContext interactionContext) {
+    sessionInfoData = api.session(interactionContext).startSession();
   }
 
-  void getSession() {
+  void getSession(InteractionContext interactionContext) {
     sessionInfoData = api.session().getSession();
   }
 
@@ -99,14 +100,13 @@ public class MockClient {
     onViewContextChange(viewContext);
   }
 
-  public APIFactory api() {
+  APIFactory api() {
     return api;
   }
 
-  public void onViewContextChange(ViewContextChange change) {
+  void onViewContextChange(ViewContextChange change) {
     onComponentModelChanges(change.getChanges());
     onViewContextChange(change.getViewContext());
-
   }
 
   private void onComponentModelChanges(List<ComponentModelChange> changes) {
@@ -177,13 +177,24 @@ public class MockClient {
     onViewContextChange(result);
   }
 
-  // Minimal view scaffolding to allow fluent test code to compile
+  public void performLoad(InteractionContext interactionContext, ViewId viewId) {
+    final var change = api.component().getComponentModel2(viewId);
+    onViewContextChange(change);
+  }
+
+  public void performAction(InteractionContext interactionContext, 
+                            ViewId viewId,
+                            UiActionRequest request) {
+    final var change = api.component().performAction(viewId, request);
+    onViewContextChange(change);
+  }
+
   public ViewHandle view(String name) {
     return new ViewHandle(() -> repository.find(name)
         .map(ComponentLocationResult::some)
         .orElseGet(() -> ComponentLocationResult.none(
-            "View[ " + name + " ]",
-            "View[ " + name + " ] was not present among the open views. Open views were:\n"
+            "View [ " + name + " ]",
+            "View [ " + name + " ] was not present among the open views. Open views were:\n"
             + repository.report())));
   }
 

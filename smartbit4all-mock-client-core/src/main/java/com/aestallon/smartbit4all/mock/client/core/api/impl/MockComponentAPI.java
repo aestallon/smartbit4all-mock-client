@@ -18,11 +18,14 @@ import com.aestallon.smartbit4all.mock.client.core.api.newtype.SmartLinkId;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.ViewContextId;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.ViewId;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.WidgetId;
+import com.aestallon.smartbit4all.mock.client.core.client.InteractionContext;
 
 public class MockComponentAPI extends AbstractAPI implements ComponentAPI {
 
-  public MockComponentAPI(WebTestClient client, RequestContext context) {
-    super(client, context);
+  public MockComponentAPI(WebTestClient client, 
+                          RequestContext context,
+                          InteractionContext interactionContext) {
+    super(client, context, interactionContext);
   }
 
   @Override

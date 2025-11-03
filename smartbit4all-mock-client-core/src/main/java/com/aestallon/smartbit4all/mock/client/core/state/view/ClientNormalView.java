@@ -56,10 +56,10 @@ public final class ClientNormalView extends ClientView {
   }
 
   @Override
-  public String toString() {
-    final var str = super.toString();
+  public String toFullString() {
+    final var str = super.toFullString();
     if (child != null) {
-      return str + "\nChild:" + StringUtil.toIndentedString("\n- "+ child);
+      return str + "\nChild:" + StringUtil.toIndentedString("\n- "+ child.toFullString());
     }
     
     return str;

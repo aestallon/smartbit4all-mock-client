@@ -64,8 +64,16 @@ public final class Toolbar extends AbstractWidget<Toolbar, Toolbar.Key> {
     this.buttons.addAll(buttons);
   }
 
-  public Optional<Button> button(final String code) {
-    return Optional.empty();
+  public Optional<Button> button(final String label) {
+    return buttons.stream().filter(it -> label.equals(it.label())).findFirst();
   }
 
+  @Override
+  public String toString() {
+    if (id() == Key.Default.INSTANCE) {
+      return "Toolbar DEFAULT";
+    } else {
+      return "Toolbar [ " + id().asId() +" ]";
+    }
+  }
 }

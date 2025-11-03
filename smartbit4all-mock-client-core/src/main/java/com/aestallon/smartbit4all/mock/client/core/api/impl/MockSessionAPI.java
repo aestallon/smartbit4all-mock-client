@@ -5,14 +5,16 @@ import org.smartbit4all.api.session.bean.RefreshSessionRequest;
 import org.smartbit4all.api.session.bean.SessionInfoData;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import com.aestallon.smartbit4all.mock.client.core.api.SessionAPI;
+import com.aestallon.smartbit4all.mock.client.core.client.InteractionContext;
 
 /**
  * WebTestClient-backed implementation of SessionAPI.
  */
 public class MockSessionAPI extends AbstractAPI implements SessionAPI {
 
-  public MockSessionAPI(WebTestClient client, RequestContext context) {
-    super(client, context);
+  public MockSessionAPI(WebTestClient client, RequestContext context,
+                        InteractionContext interactionContext) {
+    super(client, context, interactionContext);
   }
 
   @Override
@@ -27,16 +29,19 @@ public class MockSessionAPI extends AbstractAPI implements SessionAPI {
 
   @Override
   public GetAuthenticationProvidersResponse getAuthenticationProviders() {
-    return get(RequestSpec.of(UriSpec.of("/session/authentication/providers"), GetAuthenticationProvidersResponse.class));
+    return get(RequestSpec.of(UriSpec.of("/session/authentication/providers"),
+        GetAuthenticationProvidersResponse.class));
   }
 
   @Override
   public SessionInfoData refreshSession(RefreshSessionRequest refreshSessionRequest) {
-    return post(RequestSpec.of(UriSpec.of("/session/refresh"), SessionInfoData.class, refreshSessionRequest));
+    return post(RequestSpec.of(UriSpec.of("/session/refresh"), SessionInfoData.class,
+        refreshSessionRequest));
   }
 
   @Override
   public SessionInfoData setLocale(String locale) {
-    return put(RequestSpec.of(UriSpec.of("/session/locale/{locale}", locale), SessionInfoData.class));
+    return put(
+        RequestSpec.of(UriSpec.of("/session/locale/{locale}", locale), SessionInfoData.class));
   }
 }
