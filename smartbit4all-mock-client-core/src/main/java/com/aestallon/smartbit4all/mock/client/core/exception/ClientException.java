@@ -8,8 +8,8 @@ public abstract sealed class ClientException
 
   protected final InteractionContext ctx;
 
-  protected ClientException(InteractionContext ctx) {
-    super();
+  protected ClientException(InteractionContext ctx, String message) {
+    super(message);
     this.ctx = ctx;
   }
 

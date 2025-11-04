@@ -83,14 +83,11 @@ abstract class AbstractAPI {
 
   private final WebTestClient client;
   private final RequestContext requestContext;
-  private final InteractionContext interactionContext;
 
   protected AbstractAPI(WebTestClient client, 
-                        RequestContext requestContext,
-                        InteractionContext interactionContext) {
+                        RequestContext requestContext) {
     this.client = client;
     this.requestContext = requestContext;
-    this.interactionContext = interactionContext;
   }
 
   protected final <T> T post(RequestSpec<T> requestSpec) {
@@ -126,7 +123,7 @@ abstract class AbstractAPI {
             .contentType(MediaType.APPLICATION_JSON)
             .bodyValue(MockClient.OBJECT_MAPPER.writeValueAsString(requestSpec.body));
       } catch (JsonProcessingException e) {
-        throw new NetworkExchangeException(interactionContext, e);
+        throw new NetworkExchangeException(requestContext.interactionContext(), e);
       }
     } else {
       spec = body;
@@ -160,7 +157,7 @@ abstract class AbstractAPI {
     try {
       return MockClient.OBJECT_MAPPER.readValue(responseBody, requestSpec.responseType);
     } catch (IOException e) {
-      throw new NetworkExchangeException(interactionContext, e);
+      throw new NetworkExchangeException(requestContext.interactionContext(), e);
     }
   }
 

@@ -1,7 +1,7 @@
 package com.aestallon.smartbit4all.mock.client.core.client;
 
 import java.util.Objects;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 import org.assertj.core.util.Strings;
 import org.smartbit4all.api.localauthentication.bean.LocalAuthenticationLoginRequest;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -18,7 +18,7 @@ public final class MockClientBuilder {
   private String localAuthBasePath = BASE_PATH_DEFAULT;
   private String sessionBasePath = BASE_PATH_DEFAULT;
 
-  private Consumer<MockClient> authenticator;
+  private BiConsumer<MockClient, InteractionContext> authenticator;
   private String launchEndpoint;
 
   private String token;
@@ -35,8 +35,8 @@ public final class MockClientBuilder {
   }
 
   public MockClientBuilder withLocalAuthentication(String username, String password) {
-    authenticator = client -> client.api()
-        .localAuth()
+    authenticator = (client, ctx) -> client.api()
+        .localAuth(ctx)
         .login(new LocalAuthenticationLoginRequest()
             .username(username)
             .password(password));
@@ -86,22 +86,24 @@ public final class MockClientBuilder {
   public MockClient build() {
 
     final var actor = new MockClient(httpClient);
+    final var ctx = new InteractionContext("Initialising Client");
     if (defaultInitialization) {
-      actor.startSession();
+      actor.startSession(ctx);
 
       if (authenticator != null) {
-        authenticator.accept(actor);
-        actor.getSession();
+        authenticator.accept(actor, ctx);
+        actor.getSession(ctx);
       }
 
-      actor.startViewContext();
+      actor.startViewContext(ctx);
     }
 
     if (!Strings.isNullOrEmpty(launchEndpoint)) {
-      actor.api().custom().get(launchEndpoint);
+      actor.api().custom(ctx.push("Performing Launch Call")).get(launchEndpoint);
     }
 
-    actor.syncViewContext();
+    actor.syncViewContext(ctx);
+    System.out.println(ctx);
     return actor;
   }
 }

@@ -13,6 +13,7 @@ import org.smartbit4all.api.view.bean.ViewContextChange;
 import org.smartbit4all.api.view.bean.ViewData;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.ViewId;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.WidgetId;
+import com.aestallon.smartbit4all.mock.client.core.client.InteractionContext;
 import com.aestallon.smartbit4all.mock.client.core.client.MockClient;
 import com.aestallon.smartbit4all.mock.client.core.state.ClientComponent;
 import com.aestallon.smartbit4all.mock.client.core.state.component.interactable.Button;
@@ -118,15 +119,8 @@ public abstract sealed class ClientView
     return (Map<String, Object>) v;
   }
 
-  public void ensureLoaded() {
-    if (model == null) {
-      load();
-    }
-  }
-
-  public void load() {
-    ViewContextChange change = client.api().component().getComponentModel2(id);
-    client.onViewContextChange(change);
+  public boolean isLoaded() {
+    return model != null;
   }
 
   public void close() {
@@ -188,6 +182,7 @@ public abstract sealed class ClientView
   public String toString() {
     return "View [ name: " + name + " ][ id: " + id + " ]";
   }
+
   public String toFullString() {
     final var sb = new StringBuilder(toString());
     if (dialogs.isEmpty()) {

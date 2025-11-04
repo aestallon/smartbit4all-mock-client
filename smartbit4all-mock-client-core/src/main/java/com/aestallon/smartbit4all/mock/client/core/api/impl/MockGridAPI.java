@@ -7,7 +7,6 @@ import org.smartbit4all.api.grid.bean.GridUpdateData;
 import org.smartbit4all.api.view.bean.ViewContextChange;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import com.aestallon.smartbit4all.mock.client.core.api.GridAPI;
-import com.aestallon.smartbit4all.mock.client.core.client.InteractionContext;
 
 /**
  * WebTestClient-backed implementation of GridAPI.
@@ -17,9 +16,8 @@ import com.aestallon.smartbit4all.mock.client.core.client.InteractionContext;
  */
 public class MockGridAPI extends AbstractAPI implements GridAPI {
 
-  public MockGridAPI(WebTestClient client, RequestContext context,
-                     InteractionContext interactionContext) {
-    super(client, context, interactionContext);
+  public MockGridAPI(WebTestClient client, RequestContext context) {
+    super(client, context);
   }
 
   @Override

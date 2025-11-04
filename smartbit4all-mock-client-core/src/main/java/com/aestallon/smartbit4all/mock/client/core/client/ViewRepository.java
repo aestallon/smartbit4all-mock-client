@@ -1,12 +1,11 @@
 package com.aestallon.smartbit4all.mock.client.core.client;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.assertj.core.api.Fail;
 import org.smartbit4all.api.view.bean.ViewData;
 import com.aestallon.smartbit4all.mock.client.core.api.newtype.ViewId;
+import com.aestallon.smartbit4all.mock.client.core.exception.InvalidOperationException;
 import com.aestallon.smartbit4all.mock.client.core.state.view.ClientNormalView;
 import com.aestallon.smartbit4all.mock.client.core.state.view.ClientView;
 
@@ -24,8 +23,9 @@ final class ViewRepository {
     return root != null;
   }
 
-  ClientView add(ViewData viewData) {
+  ClientView open(InteractionContext ctx, ViewData viewData) {
     final ViewId id = new ViewId(viewData.getUuid());
+    ctx.push("Opening View [ name: " + viewData.getViewName() + " ][ id: " + id + " ]");
     final ClientView view;
     switch (viewData.getType()) {
       case NORMAL -> {
@@ -46,23 +46,22 @@ final class ViewRepository {
         final ClientView parent = views.get(parentId);
         view = parent.openDialog(viewData);
       }
-      default -> {
-        Fail.fail("Cannot create view, for unknown view type: " + viewData.getType());
-        throw new AssertionError("Unreachable code");
-      }
+      default -> throw new InvalidOperationException(
+          ctx, 
+          "Unsupported view type: " + viewData.getType());
     }
     views.put(id, view);
     return view;
   }
 
-  void close(ViewId id) {
+  void close(InteractionContext ctx, ViewId id) {
     final ClientView view = views.get(id);
     if (view == null) {
-      //
-      System.out.println("Cannot close view, for cannot find view by ID: " + id);
+      ctx.push("Tried to close View [ " + id + " ], but no such view exists!");
     } else {
       view.close();
       views.remove(id);
+      ctx.push("Closed " + view);
     }
   }
 

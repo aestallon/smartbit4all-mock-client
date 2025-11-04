@@ -13,23 +13,23 @@ import com.aestallon.smartbit4all.mock.client.core.api.impl.MockSessionAPI;
 public record APIFactory(MockClient client) {
 
   public ComponentAPI component(InteractionContext interactionContext) {
-    return new MockComponentAPI(client.webClient(), client.requestContext(), interactionContext);
+    return new MockComponentAPI(client.webClient(), client.requestContext(interactionContext));
   }
 
   public SessionAPI session(InteractionContext interactionContext) {
-    return new MockSessionAPI(client.webClient(), client.requestContext(), interactionContext);
+    return new MockSessionAPI(client.webClient(), client.requestContext(interactionContext));
   }
 
   public LocalAuthAPI localAuth(InteractionContext interactionContext) {
-    return new MockLocalAuthAPI(client.webClient(), client.requestContext(), interactionContext);
+    return new MockLocalAuthAPI(client.webClient(), client.requestContext(interactionContext));
   }
 
   public GridAPI grid(InteractionContext interactionContext) {
-    return new MockGridAPI(client.webClient(), client.requestContext(), interactionContext);
+    return new MockGridAPI(client.webClient(), client.requestContext(interactionContext));
   }
 
   public CustomAPI custom(InteractionContext interactionContext) {
-    return new CustomAPI(client.webClient(), client.requestContext(), interactionContext);
+    return new CustomAPI(client.webClient(), client.requestContext(interactionContext));
   }
 
 }

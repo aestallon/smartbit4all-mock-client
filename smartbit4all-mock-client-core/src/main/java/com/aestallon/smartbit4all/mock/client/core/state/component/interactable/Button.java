@@ -35,23 +35,21 @@ public final class Button extends ViewComponent {
       request.putParamsItem("model", toolbar.view().componentModel().getData());
     }
 
-    final var change = client
-        .api().component()
-        .performAction(toolbar.view().id(), request);
-    client.onViewContextChange(change);
+    final String activity = "Clicking button: " + toolbar.view() + " --> " + toolbar + " --> " + this;
+    client.performAction(activity, toolbar.view().id(), request);
   }
-  
+
   public UiAction action() {
     return action;
   }
-  
+
   public UiActionDescriptor descriptor() {
     return action.getDescriptor();
   }
 
   @Override
   public String toString() {
-    return "Button [ code: " + code() + " ][ label: " + label() + " ]"; 
+    return "Button [ code: " + code() + " ][ label: " + label() + " ]";
   }
-  
+
 }

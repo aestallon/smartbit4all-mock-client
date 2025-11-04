@@ -5,16 +5,14 @@ import org.smartbit4all.api.session.bean.RefreshSessionRequest;
 import org.smartbit4all.api.session.bean.SessionInfoData;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import com.aestallon.smartbit4all.mock.client.core.api.SessionAPI;
-import com.aestallon.smartbit4all.mock.client.core.client.InteractionContext;
 
 /**
  * WebTestClient-backed implementation of SessionAPI.
  */
 public class MockSessionAPI extends AbstractAPI implements SessionAPI {
 
-  public MockSessionAPI(WebTestClient client, RequestContext context,
-                        InteractionContext interactionContext) {
-    super(client, context, interactionContext);
+  public MockSessionAPI(WebTestClient client, RequestContext context) {
+    super(client, context);
   }
 
   @Override
