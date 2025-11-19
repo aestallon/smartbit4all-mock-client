@@ -226,9 +226,8 @@ public class MockClient implements TestClient {
     }
   }
 
-  public void performAction(String interaction, ViewId viewId, UiActionRequest request) {
+  public void performAction(InteractionContext ctx, ViewId viewId, UiActionRequest request) {
     final var view = repository.get(viewId);
-    final var ctx = new InteractionContext(interaction);
     final var change = api
         .component(ctx.push("Performing Action [ " + request.getCode() + " ] on " + view))
         .performAction(viewId, request);
@@ -236,7 +235,7 @@ public class MockClient implements TestClient {
     System.out.println(ctx);
   }
 
-  public void performAction(String interaction, ViewId viewId, WidgetId widgetId,
+  public void performAction(InteractionContext ctx, ViewId viewId, WidgetId widgetId,
                             NodeId nodeId, UiActionRequest request) {
     final var view = repository.get(viewId);
 

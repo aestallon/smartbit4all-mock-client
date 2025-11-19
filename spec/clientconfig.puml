@@ -1,0 +1,89 @@
+@startuml
+title TestClientBuilder Steps
+'https://plantuml.com/state-diagram
+'skinparam linetype polyline
+hide empty description
+<style>
+  diamond {
+    BackgroundColor #palegreen
+    LineColor #green
+    LineThickness 2.5
+}
+</style>
+
+[*] --> IsLocal
+
+state EnvironmentSpec {
+  state "IsLocal?" as IsLocal <<choice>>
+  
+  state "Local" as Local
+  state "Remote" as Remote
+  
+  IsLocal --> Local
+  IsLocal --> Remote
+}
+
+Local --> AuthChoice
+Remote --> AuthChoice
+
+state AuthSpec {
+  state "Choice" as AuthChoice <<choice>>
+  
+  state "No Authentication" as AuthNo
+  state "Implicit Authentication" as AuthImplicit
+  state "Explicit Authentication" as AuthExplicit
+  
+  AuthChoice --> AuthNo
+  AuthChoice --> AuthImplicit
+  AuthChoice --> AuthExplicit
+}
+
+AuthNo --> SmartLinkOrGeneric
+AuthImplicit --> SmartLinkOrGeneric
+AuthExplicit --> LoginHandlerChoice
+
+state LaunchSpec {
+
+  state "SmartLink or Generic" as SmartLinkOrGeneric <<choice>>
+  SmartLinkOrGeneric --> SmartLink
+  SmartLinkOrGeneric --> LaunchCallGeneric
+  
+  state "Any" as LaunchSpecAny <<choice>>
+  LaunchSpecAny --> SmartLink
+  LaunchSpecAny --> LaunchCallGeneric
+  LaunchSpecAny --> LaunchCallSeparate
+  
+  state "SmartLink" as SmartLink
+  state "Generic Launch Call" as LaunchCallGeneric
+  state "Explicit Anonymous and Authenticated Launch Calls" as LaunchCallSeparate
+  
+}
+
+SmartLink --> IcrChoice
+LaunchCallGeneric --> IcrChoice
+LaunchCallSeparate --> IcrChoice
+
+state LoginHandlerSpec {
+
+  state "Choice" as LoginHandlerChoice <<choice>>
+  
+  state "SERVER_SIDE" as ServerSide
+  state "INSTEAD_OF_ACTION" as InsteadOfAction
+  state "BEFORE_ACTION" as BeforeAction
+  
+  LoginHandlerChoice --> ServerSide
+  LoginHandlerChoice --> InsteadOfAction
+  LoginHandlerChoice --> BeforeAction
+
+}
+
+ServerSide --> IcrChoice
+InsteadOfAction --> LaunchSpecAny
+BeforeAction --> SmartLinkOrGeneric
+
+state ImplicitComponentRegistrySpec {
+  state "Choice" as IcrChoice <<choice>>
+}
+
+IcrChoice --> [*]
+@enduml

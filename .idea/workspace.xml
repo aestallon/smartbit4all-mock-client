@@ -5,23 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3bd8f65a-3a13-420d-b691-3c2c0ec0d981" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/assertj/ToolbarAssert.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/assertj/ToolbarHandle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/client/TestClientBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/bootstrap.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/clientconfig.puml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/AbstractAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/AbstractAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/CustomAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/CustomAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/MockComponentAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/MockComponentAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/MockGridAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/MockGridAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/MockLocalAuthAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/MockLocalAuthAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/MockSessionAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/MockSessionAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/assertj/ViewHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/assertj/ViewHandle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/client/APIFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/client/APIFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/client/InteractionContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/client/InteractionContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/newtype/NodeId.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/newtype/NodeId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/assertj/AbstractComponentHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/assertj/AbstractComponentHandle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/assertj/ButtonHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/assertj/ButtonHandle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/client/MockClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/client/MockClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/client/MockClientBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/client/MockClientBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/exception/ClientException.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/exception/ClientException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/interactable/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/interactable/Button.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/interactable/form/AbstractFormElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/interactable/form/AbstractFormElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/interactable/form/InputField.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/interactable/form/InputField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/interactable/form/Select.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/interactable/form/Select.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/AbstractWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/AbstractWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/CompositeLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/CompositeLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/DeferredInitWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/DeferredInitWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/Form.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/Form.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/Grid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/Toolbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/Toolbar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/view/ClientNormalView.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/view/ClientNormalView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/WidgetKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/component/layout/WidgetKey.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/view/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/state/view/ClientView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/test/java/com/aestallon/smartbit4all/mock/client/core/MockClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/smartbit4all-mock-client-core/src/test/java/com/aestallon/smartbit4all/mock/client/core/MockClientTest.java" afterDir="false" />
     </list>
@@ -61,6 +68,8 @@
         <option value="Exception" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="UML Activity" />
+        <option value="UML State" />
       </list>
     </option>
   </component>
@@ -73,12 +82,12 @@
     &quot;assignee&quot;: &quot;szabolcs-bazil-papp&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/aestallon/smartbit4all-mock-client.git",
-    "accountId": "bed5fe4d-c754-4fc0-801a-619a49fb0018"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/aestallon/smartbit4all-mock-client.git&quot;,
+    &quot;accountId&quot;: &quot;bed5fe4d-c754-4fc0-801a-619a49fb0018&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$USER_HOME$/.gradle/caches/9.1.0/generated-gradle-jars/gradle-api-9.1.0.jar!/org/gradle/api/internal/tasks/testing/SuiteTestClassProcessor.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/9.1.0/generated-gradle-jars/gradle-api-9.1.0.jar!/org/gradle/api/internal/tasks/testing/junitplatform/JUnitPlatformTestClassProcessor.class" root0="SKIP_INSPECTION" />
@@ -87,9 +96,12 @@
     <setting file="jar://$USER_HOME$/.gradle/caches/9.1.0/generated-gradle-jars/gradle-api-9.1.0.jar!/org/gradle/internal/dispatch/ProxyDispatchAdapter.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/9.1.0/generated-gradle-jars/gradle-api-9.1.0.jar!/org/gradle/internal/dispatch/ReflectionDispatch.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/3.27.4/9d7aaef419ce67daa9bcee1827b8d7c7878fb6e/assertj-core-3.27.4-sources.jar!/org/assertj/core/api/AbstractAssert.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/3.27.4/9d7aaef419ce67daa9bcee1827b8d7c7878fb6e/assertj-core-3.27.4-sources.jar!/org/assertj/core/api/AbstractStringAssert.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/3.27.4/9d7aaef419ce67daa9bcee1827b8d7c7878fb6e/assertj-core-3.27.4-sources.jar!/org/assertj/core/api/AssertProvider.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/3.27.4/9d7aaef419ce67daa9bcee1827b8d7c7878fb6e/assertj-core-3.27.4-sources.jar!/org/assertj/core/api/Assertions.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/3.27.4/9d7aaef419ce67daa9bcee1827b8d7c7878fb6e/assertj-core-3.27.4-sources.jar!/org/assertj/core/api/Condition.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/3.27.4/9d7aaef419ce67daa9bcee1827b8d7c7878fb6e/assertj-core-3.27.4-sources.jar!/org/assertj/core/api/Fail.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/3.27.4/9d7aaef419ce67daa9bcee1827b8d7c7878fb6e/assertj-core-3.27.4-sources.jar!/org/assertj/core/internal/Comparables.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/3.27.4/9d7aaef419ce67daa9bcee1827b8d7c7878fb6e/assertj-core-3.27.4-sources.jar!/org/assertj/core/internal/Failures.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-test/6.2.11/f1f08a43c0d6db53918603592eeaf0f25a547b1/spring-test-6.2.11-sources.jar!/org/springframework/test/util/AssertionErrors.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-test/6.2.11/f1f08a43c0d6db53918603592eeaf0f25a547b1/spring-test-6.2.11-sources.jar!/org/springframework/test/web/reactive/server/ApplicationContextSpec.java" root0="SKIP_INSPECTION" />
@@ -121,7 +133,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "DefaultPlantUmlFileTemplate": "UML Component",
+    "DefaultPlantUmlFileTemplate": "UML State",
     "Gradle.Build smartbit4all-mock-client.executor": "Run",
     "Gradle.MockClientTest.foo.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -133,7 +145,7 @@
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "feature/interaction-context",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
@@ -148,7 +160,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "advanced.settings",
+    "settings.editor.selected.configurable": "settings.sync",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -320,7 +332,21 @@
       <workItem from="1761587084074" duration="10576000" />
       <workItem from="1762103958023" duration="221000" />
       <workItem from="1762114286779" duration="6950000" />
-      <workItem from="1762160618251" duration="15190000" />
+      <workItem from="1762160618251" duration="15902000" />
+      <workItem from="1762242001845" duration="11650000" />
+      <workItem from="1762284940049" duration="4245000" />
+      <workItem from="1762346548564" duration="6087000" />
+      <workItem from="1762417551757" duration="9804000" />
+      <workItem from="1762504949797" duration="2945000" />
+      <workItem from="1762764797181" duration="5080000" />
+      <workItem from="1762781419535" duration="631000" />
+      <workItem from="1762852302267" duration="1198000" />
+      <workItem from="1762895523662" duration="27000" />
+      <workItem from="1762895558122" duration="3839000" />
+      <workItem from="1762928467774" duration="5766000" />
+      <workItem from="1763020951495" duration="15000" />
+      <workItem from="1763540163861" duration="5219000" />
+      <workItem from="1763548000998" duration="8404000" />
     </task>
     <servers />
   </component>
@@ -348,7 +374,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/AbstractAPI.java</url>
-          <line>162</line>
+          <line>180</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -358,8 +384,8 @@
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/smartbit4all-mock-client-core/src/test/java/com/aestallon/smartbit4all/mock/client/core/MockClientTest.java</url>
-          <line>39</line>
+          <url>file://$PROJECT_DIR$/smartbit4all-mock-client-core/src/main/java/com/aestallon/smartbit4all/mock/client/core/api/impl/AbstractAPI.java</url>
+          <line>154</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
@@ -367,7 +393,12 @@
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.springframework.test.web.reactive.server.DefaultWebTestClient$DefaultResponseSpec" memberName="response" />
+        <PinnedItemInfo parentTag="org.springframework.test.web.reactive.server.ExchangeResult" memberName="responseBody" />
       </pinned-members>
     </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

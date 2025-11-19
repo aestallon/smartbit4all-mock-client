@@ -8,10 +8,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import com.aestallon.smartbit4all.mock.client.core.client.MockClient;
-import com.aestallon.smartbit4all.mock.client.core.client.InteractionContext;
 import com.aestallon.smartbit4all.mock.client.core.exception.NetworkExchangeException;
 import com.aestallon.smartbit4all.mock.client.core.util.StringUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.base.Strings;
 
 abstract class AbstractAPI {
 
@@ -84,7 +84,7 @@ abstract class AbstractAPI {
   private final WebTestClient client;
   private final RequestContext requestContext;
 
-  protected AbstractAPI(WebTestClient client, 
+  protected AbstractAPI(WebTestClient client,
                         RequestContext requestContext) {
     this.client = client;
     this.requestContext = requestContext;
@@ -109,7 +109,7 @@ abstract class AbstractAPI {
         requestContext.basePath() + requestSpec.uriSpec.template,
         requestSpec.uriSpec.vars), requestSpec);
   }
-  
+
 
   private <T> T exchange(WebTestClient.RequestBodyUriSpec ex, RequestSpec<T> requestSpec) {
     WebTestClient.RequestBodySpec body = ex.uri(
@@ -148,11 +148,32 @@ abstract class AbstractAPI {
     });
     final var response = request.exchange();
     if (requestSpec.responseType == null || Void.class.equals(requestSpec.responseType)) {
+      EntityExchangeResult<String> entityExchangeResult =
+          response.expectBody(String.class).returnResult();
+      final String body = entityExchangeResult.getResponseBody();
+      HttpStatusCode status = entityExchangeResult.getStatus();
+      if (!status.is2xxSuccessful()) {
+        
+        throw new NetworkExchangeException(requestContext.interactionContext(),
+            "Received status code " + status + " when submitting " + requestSpec.uriSpec);
+      }
+
+      if (!Strings.isNullOrEmpty(body)) {
+        throw new NetworkExchangeException(requestContext.interactionContext(),
+            "Expected to perform a VOID call when submitting " + requestSpec.uriSpec
+            + "but received content: " + body);
+      }
+      
       return null;
     }
 
     EntityExchangeResult<byte[]> entityExchangeResult = response.expectBody().returnResult();
     HttpStatusCode status = entityExchangeResult.getStatus();
+    if (!status.is2xxSuccessful()) {
+      throw new NetworkExchangeException(requestContext.interactionContext(),
+          "Received status code " + status + " when submitting " + requestSpec.uriSpec);
+    }
+
     byte[] responseBody = entityExchangeResult.getResponseBody();
     try {
       return MockClient.OBJECT_MAPPER.readValue(responseBody, requestSpec.responseType);

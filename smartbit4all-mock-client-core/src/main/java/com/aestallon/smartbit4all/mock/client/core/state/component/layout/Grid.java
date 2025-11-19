@@ -5,7 +5,7 @@ import com.aestallon.smartbit4all.mock.client.core.state.view.ClientView;
 
 public final class Grid extends DeferredInitWidget<Grid, Grid.Key> {
 
-  public record Key(String strVal) implements WidgetKey<Grid> {
+  public record Key(String strVal) implements WidgetKey<Grid.Key, Grid> {
 
     @Override
     public WidgetId asId() {
@@ -21,6 +21,10 @@ public final class Grid extends DeferredInitWidget<Grid, Grid.Key> {
     
     // every grid has a "default" toolbar:
     toolbar = new Toolbar(view, new Toolbar.Key.Custom(key.strVal() + "_toolbar"));
+  }
+  
+  public Toolbar toolbar() {
+    return toolbar;
   }
 
   @Override

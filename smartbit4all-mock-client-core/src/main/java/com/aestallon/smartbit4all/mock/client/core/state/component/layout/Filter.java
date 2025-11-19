@@ -6,7 +6,7 @@ import com.aestallon.smartbit4all.mock.client.core.state.view.ClientView;
 public final class Filter extends DeferredInitWidget<Filter, Filter.Key> {
 
 
-  public sealed interface Key extends WidgetKey<Filter> {
+  public sealed interface Key extends WidgetKey<Filter.Key, Filter> {
     record Custom(String strVal) implements Key {
       @Override
       public WidgetId asId() {

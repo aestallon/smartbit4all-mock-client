@@ -149,8 +149,8 @@ public abstract sealed class ClientView
 
   }
 
-  protected <T extends AbstractWidget<T, K>, K extends WidgetKey<T>> Optional<T> getWidget(K key) {
-    return rootLayout.getWidget(key);
+  protected <T extends AbstractWidget<T, K>, K extends WidgetKey<K, T>> Optional<T> getWidget(K k) {
+    return rootLayout.getWidget(k);
   }
 
   public Optional<Toolbar> toolbar(String identifier) {

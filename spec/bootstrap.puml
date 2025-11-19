@@ -1,0 +1,77 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:Start Session;
+note
+  Everything starts with acquiring a fresh,
+  anonymous session.
+end note
+if (Is Authentication Configured?) is (yes) then
+  if (Is Authentication Implicit?) is (yes) then
+    :Call Auth Endpoint;
+    :Start ViewContext;
+    #lightgreen:(L)
+    stop
+  else (no)
+    :Start ViewContext;
+    #lightgreen:(L)
+    partition #lightgrey;line.dashed "User Clicks the LOG-IN button for which a LoginHandler is Configured" {
+      :Button.click();
+      if (Is LoginHandler 'SERVER_SIDE'?) is (yes) then
+        :Call performAction;
+        note
+          The server is expected to use
+          the view's model to authenticate
+          the user and show views as
+          appropriate.
+        end note
+        :Get Session;
+        note
+          Session is requested to update
+          session metadata
+        end note
+        stop
+      else (no)
+        :Call Auth Endpoint;
+        note
+          A separate requested is made with the 
+          preconfigured credentials.
+        end note
+        if (How is the LoginHandler Configured?) is (INSTEAD_OF_ACTION) then
+          #lightgreen:(L)
+          note
+            The Log-in button is fake: instead of performing the action,
+            the launch sequence is carried out.
+          end note
+          stop
+        else (BEFORE_ACTION)
+          :Call performAction;
+          note
+            Being authenticated, the server is expected to respond
+            by showing appropriate views.
+          end note
+          stop
+        endif
+      endif
+    }
+  endif
+else (No)
+  :Start ViewContext;
+  #lightgreen:(L)
+  stop
+endif
+
+
+partition #lightgreen Launch {
+  #lightgreen:(L)
+  if (Is SmartLink Launch Configured?) is (yes) then
+    :Call SmartLink Endpoint;
+  else (No)
+    :Call Launch Endpoint;
+  endif
+  :Sync ViewContext;
+  end
+}
+
+@enduml

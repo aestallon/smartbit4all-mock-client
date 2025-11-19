@@ -1,9 +1,11 @@
 package com.aestallon.smartbit4all.mock.client.core.assertj;
 
 import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import org.assertj.core.api.AssertProvider;
 import org.assertj.core.api.Assertions;
+import com.aestallon.smartbit4all.mock.client.core.exception.ClientException;
 import com.aestallon.smartbit4all.mock.client.core.state.ClientComponent;
 
 public abstract class AbstractComponentHandle<
@@ -63,6 +65,20 @@ public abstract class AbstractComponentHandle<
         Assertions.fail("Could not retrieve " + name + " of " + specifier + " because " + reason);
         return null;
       }
+    }
+  }
+
+  protected void interact(String description, Consumer<T> interaction) {
+    switch (componentLocator.get()) {
+      case ComponentLocationResult.Some(T component, String specifier) -> {
+        try {
+          interaction.accept(component);
+        } catch (ClientException e) {
+          e.fail();
+        }
+      }
+      case ComponentLocationResult.None(String specifier, String reason) -> Assertions.fail(
+          "Could not " + description + " " + specifier + " because " + reason);
     }
   }
 

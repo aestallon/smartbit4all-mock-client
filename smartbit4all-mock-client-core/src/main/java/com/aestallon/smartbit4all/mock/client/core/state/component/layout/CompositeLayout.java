@@ -24,7 +24,7 @@ public final class CompositeLayout extends AbstractWidget<CompositeLayout, Compo
   public enum Orientation { HORIZONTAL, VERTICAL }
 
 
-  public sealed interface Key extends WidgetKey<CompositeLayout> {
+  public sealed interface Key extends WidgetKey<CompositeLayout.Key, CompositeLayout> {
 
     record Custom(String strVal) implements CompositeLayout.Key {
       @Override
@@ -117,19 +117,19 @@ public final class CompositeLayout extends AbstractWidget<CompositeLayout, Compo
   }
 
   @SuppressWarnings("unchecked")
-  private <T extends AbstractWidget<T, K>, K extends WidgetKey<T>> T coerce(
+  private <T extends AbstractWidget<T, K>, K extends WidgetKey<K, T>> T coerce(
       AbstractWidget<?, ?> widget) {
     return (T) widget;
   }
 
-  public <T extends AbstractWidget<T, K>, K extends WidgetKey<T>> Optional<T> getWidget(K key) {
+  public <T extends AbstractWidget<T, K>, K extends WidgetKey<K, T>> Optional<T> getWidget(K key) {
     return stream()
         .filter(it -> it.id().equals(key))
         .findFirst()
         .map(this::coerce);
   }
 
-  public <T extends AbstractWidget<T, K>, K extends WidgetKey<T>> Stream<T> getWidgets(
+  public <T extends AbstractWidget<T, K>, K extends WidgetKey<K, T>> Stream<T> getWidgets(
       Class<T> widgetType) {
     return stream()
         .filter(widgetType::isInstance)

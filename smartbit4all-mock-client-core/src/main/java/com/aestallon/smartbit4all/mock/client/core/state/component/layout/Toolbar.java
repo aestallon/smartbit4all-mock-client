@@ -12,7 +12,7 @@ import com.google.common.base.Strings;
 
 public final class Toolbar extends AbstractWidget<Toolbar, Toolbar.Key> {
 
-  public sealed interface Key extends WidgetKey<Toolbar> {
+  public sealed interface Key extends WidgetKey<Toolbar.Key, Toolbar> {
 
     static Toolbar.Key fromString(String strVal) {
       return Strings.isNullOrEmpty(strVal) ? Default.INSTANCE : new Toolbar.Key.Custom(strVal);

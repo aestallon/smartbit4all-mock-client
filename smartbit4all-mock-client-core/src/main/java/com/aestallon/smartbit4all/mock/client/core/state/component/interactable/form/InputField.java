@@ -4,8 +4,16 @@ import com.aestallon.smartbit4all.mock.client.core.state.component.layout.Form;
 
 public final class InputField extends AbstractFormElement<String> implements FormElement {
 
-  InputField(Form form, String[] dataPath) {
-    super(form, dataPath);
+  public InputField(Form form, String[] dataPath, boolean immediateAction) {
+    super(form, dataPath, immediateAction);
   }
+  
+  public void setText(String text) {
+    set(text);
+  }
+  
+  public void getText() {
+    
+  } 
 
 }

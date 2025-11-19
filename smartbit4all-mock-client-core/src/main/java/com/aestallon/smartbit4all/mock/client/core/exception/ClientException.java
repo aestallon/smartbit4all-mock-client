@@ -1,5 +1,6 @@
 package com.aestallon.smartbit4all.mock.client.core.exception;
 
+import org.assertj.core.api.Assertions;
 import com.aestallon.smartbit4all.mock.client.core.client.InteractionContext;
 
 public abstract sealed class ClientException
@@ -22,4 +23,15 @@ public abstract sealed class ClientException
     return ctx;
   }
 
+  public void fail() {
+    final String msg = "INTERACTION FAILED:\n"
+                       + ctx() + "\n^^^^^^^^" + "\n    Error encountered here: "
+                       + getMessage();
+    final Throwable cause = getCause();
+    if (cause != null) {
+      Assertions.fail(msg, cause);
+    } else {
+      Assertions.fail(msg);
+    }
+  }
 }
