@@ -35,8 +35,9 @@ if (Is Authentication Configured?) is (yes) then
       else (no)
         :Call Auth Endpoint;
         note
-          A separate requested is made with the 
-          preconfigured credentials.
+          A separate request is made with the 
+          preconfigured credentials extracted from the active
+          view's model
         end note
         if (How is the LoginHandler Configured?) is (INSTEAD_OF_ACTION) then
           #lightgreen:(L)
