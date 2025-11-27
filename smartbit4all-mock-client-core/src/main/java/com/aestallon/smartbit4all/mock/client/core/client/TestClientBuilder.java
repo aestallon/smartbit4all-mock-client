@@ -102,6 +102,7 @@ public class TestClientBuilder {
   private ActionSelector loginAction;
   private LoginHandlerType loginHandlerType;
   private CredentialExtractor credentialExtractor;
+  // TODO: Implicit Component Registry
   // -----------------------------------------------------------------------------------------------
 
 
